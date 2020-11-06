@@ -2,9 +2,9 @@
   "name": "bookapi",
   "version": "1.0.0",
   "description": "Api built with node js and express js",
-  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon ./bin/www",
+    "lint": "eslint --fix --config .eslintrc.json \"**/*.js\""
   },
   "dependencies": {
     "cookie-parser": "~1.4.3",
@@ -15,6 +15,9 @@
     "express-validator": "^6.2.0",
     "mongoose": "^5.7.6",
     "morgan": "~1.9.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.4"
   },
   "repository": {
     "type": "git",
