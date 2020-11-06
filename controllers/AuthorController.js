@@ -74,7 +74,7 @@ exports.AuthorDetail = [
 exports.AuthorStore = [
 	body("lastName", "lastName must not be empty.").isLength({ min: 1 }).trim(),
 	body("firstName", "firstName must not be empty.").isLength({ min: 1 }).trim().custom((value,{req}) => {
-		return Author.findOne({lastName : value,firstName: req.body.firstName}).then(author => {
+		return Author.findOne({lastName : req.body.lastName,firstName: value}).then(author => {
 			if (author) {
 				return Promise.reject("Author already exist with firstName");
 			}
