@@ -6,8 +6,9 @@ require("dotenv").config();
 var apiResponse = require("./helpers/apiResponse");
 var cors = require("cors");
 
+// defining app routers.
 var indexRouter = require("./routes/index");
-
+var apiRouter = require("./routes/api");
 // DB connection
 var MONGODB_URL = process.env.MONGODB_URL;
 var mongoose = require("mongoose");
@@ -35,12 +36,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-//To allow cross-origin requests
+//To allow cross-origin requests.
 app.use(cors());
 
-//Route Prefixes
+// app level route prefixing.
 app.use("/", indexRouter);
-
+app.use("/api/", apiRouter);
 // throw 404 if URL not found
 app.all("*", function(req, res) {
 	return apiResponse.notFoundResponse(res, "Page not found");
