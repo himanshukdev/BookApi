@@ -8,4 +8,6 @@ var BookSchema = new Schema({
 	author: { type: Schema.ObjectId, ref: "Author", required: true },
 }, {timestamps: true});
 
+BookSchema.index({'$**': 'text'});
+
 module.exports = mongoose.model("Book", BookSchema);

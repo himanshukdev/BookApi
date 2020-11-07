@@ -36,6 +36,29 @@ exports.bookList = [
 ];
 
 /**
+ * Book searched List.
+ * 
+ * @returns {Object}
+ */
+exports.bookSearchList = [
+	function (req, res) {
+		try {
+			const searchString = req.body.searchParam
+			Book.find({$text: {$search: searchString}}).exec(function(err, books) { 
+				if(books.length>0){
+					return apiResponse.successResponseWithData(res, "Success", books);	
+				}else{
+					return apiResponse.successResponseWithData(res, "Success", []);
+				}
+			});
+			
+		} catch (err) {
+			//throw error in json response with status 500. 
+			return apiResponse.ErrorResponse(res, err);
+		}
+	}
+];
+/**
  * Book Detail.
  * 
  * @param {string}      id
